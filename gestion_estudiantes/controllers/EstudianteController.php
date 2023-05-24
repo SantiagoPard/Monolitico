@@ -42,34 +42,32 @@ class EstudianteController extends BaseController
         
     }
 
-    function readRow($id)
+    function readRow($codigo)
     {
-        // $sql = 'select * from estudiante';
-        // $sql .= ' where id=' . $id;
-        // $conexiondb = new ConexionDbController();
-        // $resultadoSQL = $conexiondb->execSQL($sql);
-        // $estudiante = new estudiante();
-        // while ($registro = $resultadoSQL->fetch_assoc()) {
-        //     $estudiante->setId($registro['id']);
-        //     $estudiante->setName($registro['name']);
-        //     $estudiante->setUsername($registro['username']);
-        //     $estudiante->setPassword('');
-        // }
-        // $conexiondb->close();
-        // return $estudiante;
+        $sql = 'select * from estudiantes';
+        $sql .= ' where codigo=' . $codigo;
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $estudiante = new estudiante();
+        while ($registro = $resultadoSQL->fetch_assoc()) {
+            $estudiante->setCodigo($registro['codigo']);
+            $estudiante->setNombre($registro['nombres']);
+            $estudiante->setApellido($registro['apellidos']);
+        }
+        $conexiondb->close();
+        return $estudiante;
     }
 
-    function update($id, $estudiante)
+    function updateEstudiante($codigo, $estudiante)
     {
-        // $sql = 'update estudiante set ';
-        // $sql .= 'name="' . $estudiante->getName() . '",';
-        // $sql .= 'username="' . $estudiante->getUsername() . '",';
-        // $sql .= 'password="' . $estudiante->getPassword() . '" ';
-        // $sql .= ' where id=' . $id;
-        // $conexiondb = new ConexionDbController();
-        // $resultadoSQL = $conexiondb->execSQL($sql);
-        // $conexiondb->close();
-        // return $resultadoSQL;
+        $sql = 'update estudiantes set ';
+        $sql .= 'nombres ="' . $estudiante->getNombre() . '",';
+        $sql .= 'apellidos="' . $estudiante->getApellido() . '"';
+        $sql .= ' where codigo=' . $codigo .';';
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $conexiondb->close();
+        return $resultadoSQL;
     }
 
     function delete($codigo)

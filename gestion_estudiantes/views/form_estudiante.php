@@ -11,12 +11,16 @@ $codigo = empty($_GET['codigo']) ? '' : $_GET['codigo'];
 $titulo = 'Registrar Estudiante';
 $urlAction = "accion_registro_Estudiante.php";
 $Estudiante = new Estudiante();
-// if (!empty($codigo)) {
-//     $titulo = 'Modificar Estudiante';
-//     $urlAction = "accion_modificar_Estudiante.php";
-//     $EstudianteController = new EstudianteController();
-//     $Estudiante = $EstudianteController->readRow($codigo); 
-// }
+$readOnly = '';
+
+if (!empty($codigo)) {
+    $titulo = 'Modificar Estudiante';
+    $urlAction = "accion_modificar_Estudiante.php";
+    $EstudianteController = new EstudianteController();
+    $Estudiante = $EstudianteController->readRow($codigo);
+    $readOnly = 'readonly'.' style="opacity:0.5; cursor:default;  background-color: #eee;"';
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +35,7 @@ $Estudiante = new Estudiante();
     <form action="<?php echo $urlAction;?>" method="post">
         <label>
             <span>codigo:</span>
-            <input type="number" name="codigo" min="1" value="<?php echo $Estudiante->getcodigo(); ?>" required>
+            <input type="number" name="codigo"  min="1" value="<?php echo $Estudiante->getCodigo(); ?>"  required <?php echo $readOnly?>>
         </label>
         <br>
         <label>
