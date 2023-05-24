@@ -11,18 +11,17 @@ class EstudianteController extends BaseController
 
     function create($estudiante)
     {
-        // $sql = 'insert into estudiante ';
-        // $sql .= '(id,name,username,password) values ';
-        // $sql .= '(';
-        // $sql .= $estudiante->getId() . ',';
-        // $sql .= '"' . $estudiante->getName() . '",';
-        // $sql .= '"' . $estudiante->getUsername() . '",';
-        // $sql .= '"' . $estudiante->getPassword() . '"';
-        // $sql .= ')';
-        // $conexiondb = new ConexionDbController();
-        // $resultadoSQL = $conexiondb->execSQL($sql);
-        // $conexiondb->close();
-        // return $resultadoSQL;
+        $sql = 'insert into estudiantes ';
+        $sql .= '(codigo,nombres,apellidos) values ';
+        $sql .= '(';
+        $sql .= $estudiante->getCodigo() . ',';
+        $sql .= '"' . $estudiante->getNombre() . '",';
+        $sql .= '"' . $estudiante->getApellido() . '"';
+        $sql .= ')';
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $conexiondb->close();
+        return $resultadoSQL;
     }
 
     function readEstudiantes()
@@ -39,7 +38,6 @@ class EstudianteController extends BaseController
             array_push($estudiantes, $estudiante);
         }
         $conexiondb->close();
-        print_r($estudiante);
         return $estudiantes;
         
     }
