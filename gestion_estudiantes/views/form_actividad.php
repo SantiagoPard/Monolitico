@@ -14,18 +14,16 @@ $codigo = $_GET['codigo'];
 $titulo = 'Registrar Actividad';
 $urlAction = "accion_registro_actividad.php";
 $Actividad = new Actividad();
-$Estudiante = new Estudiante();
 $readOnly = 'readonly style="opacity:0.5; cursor:default;  background-color: #eee;"';
-print_r($codigo);
 
-// if (!empty($codigo)) {
-//     $titulo = 'Modificar Estudiante';
-//     $urlAction = "accion_modificar_Estudiante.php";
-//     $EstudianteController = new EstudianteController();
-//     $Estudiante = $EstudianteController->readRow($codigo);
-//     $readOnly = 'readonly'.' style="opacity:0.5; cursor:default;  background-color: #eee;"';
+if (!empty($id)) {
+    $titulo = 'Modificar Actividad';
+    $urlAction = "accion_modificar_actividad.php?id=".$id;
+    $EstudianteController = new EstudianteController();
+    $Actividad = $EstudianteController->readRowAct($id);
+    $readOnly = 'readonly' . ' style="opacity:0.5; cursor:default;  background-color: #eee;"';
 
-// }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,6 +31,11 @@ print_r($codigo);
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        textarea {
+            resize: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,13 +44,13 @@ print_r($codigo);
     </h1>
     <form action="<?php echo $urlAction; ?>" method="post">
         <label>
-            <span>codigo estudiante: </span>
+            <span>codigo estudiante:</span>
             <input type="number" name="codigo" value="<?php echo $codigo; ?>" required <?php echo $readOnly ?>>
         </label>
         <br>
         <label>
             <span>Descripcion</span>
-            <input type="text" name="descripcion" value="<?php echo $Actividad->getDescripcion(); ?>" required>
+            <textarea rows="5" cols="70" name="descripcion" required><?php echo $Actividad->getDescripcion(); ?></textarea>
         </label>
         <br>
         <label>

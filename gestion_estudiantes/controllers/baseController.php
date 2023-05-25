@@ -8,8 +8,10 @@ abstract class BaseController
     abstract function readEstudiantes();
     abstract function updateEstudiante($codigo, $model);
     abstract function delete($codigo);
-    abstract function readRow($id);
+    abstract function readRow($codigo);
     abstract function readNotas($codigo);
     abstract function createActividad($model,$codigo);
+    abstract function updateActividad($id,$model);
+    abstract function readRowAct($id);
     
 }

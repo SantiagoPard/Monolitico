@@ -94,7 +94,6 @@ class EstudianteController extends BaseController
             array_push($actividades, $actividad);
         }
         $conexiondb->close();
-        print_r($actividades);
         return $actividades;
     }
     function createActividad($Actividad, $codigo)
@@ -106,6 +105,29 @@ class EstudianteController extends BaseController
         $sql .= '' . $Actividad->getNota() . ',';
         $sql .= '' . $codigo . '';
         $sql .= ')';
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $conexiondb->close();
+        return $resultadoSQL;
+    }
+    function readRowAct($id){
+        $sql = 'select * from actividades';
+        $sql .= ' where id=' . $id;
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $actividad = new Actividad();
+        while ($registro = $resultadoSQL->fetch_assoc()) {
+            $actividad->setDescripcion($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
+        }
+        $conexiondb->close();
+        return $actividad;
+    }
+    function updateActividad($id,$Actividad){
+        $sql = 'update actividades set ';
+        $sql .= 'descripcion="' . $Actividad->getDescripcion() . '",';
+        $sql .= 'nota="' . $Actividad->getNota() . '"';
+        $sql .= ' where id=' . $id . ';';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
