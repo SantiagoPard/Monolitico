@@ -5,6 +5,7 @@ namespace estudianteController;
 use baseControler\BaseController;
 use conexionDb\ConexionDbController;
 use estudiante\Estudiante;
+use actividad\Actividad;
 
 class EstudianteController extends BaseController
 {
@@ -77,5 +78,25 @@ class EstudianteController extends BaseController
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
         return $resultadoSQL;
+    }
+    function readNotas($codigo){
+        $sql  = 'select id,descripcion,nota from estudiantes,actividades ';
+        $sql .= 'WHERE estudiantes.codigo='.$codigo.'&&  estudiantes.codigo = actividades.codigoEstudiante;';
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $actividades = [];
+        while ($registro = $resultadoSQL->fetch_assoc()) {
+            $actividad = new Actividad();
+            $actividad->setId($registro['id']);
+            $actividad->setDescripcion($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
+            array_push($actividades, $actividad);
+        }
+        $conexiondb->close();
+        print_r($actividades);
+        return $actividades;
+    }
+    function createActividad(){
+        
     }
 }

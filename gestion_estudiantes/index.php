@@ -40,6 +40,7 @@ $estudiantes = $estudianteController->readEstudiantes();
                     echo '  <td>';
                     echo '      <a href="views/form_estudiante.php?codigo=' . $estudiante->getCodigo() . '">modificar</a>';
                     echo '      <a href="views/accion_borrar_estudiante.php?codigo=' . $estudiante->getCodigo() . '">borrar</a>';
+                    echo '      <a href="views/notas_estudiante.php?codigo=' . $estudiante->getCodigo() . '&nombres='.$estudiante->getNombre().'">Notas</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }

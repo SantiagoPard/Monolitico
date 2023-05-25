@@ -9,4 +9,7 @@ abstract class BaseController
     abstract function updateEstudiante($codigo, $model);
     abstract function delete($codigo);
     abstract function readRow($id);
+    abstract function readNotas($codigo);
+    abstract function createActividad();
+    
 }
