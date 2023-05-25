@@ -133,4 +133,11 @@ class EstudianteController extends BaseController
         $conexiondb->close();
         return $resultadoSQL;
     }
+    function deleteAct($id){
+        $sql = 'delete from actividades where id=' .$id;
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $conexiondb->close();
+        return $resultadoSQL;
+    }
 }

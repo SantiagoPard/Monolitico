@@ -53,7 +53,7 @@ $actividades = $estudianteController->readNotas($codigo);
                     echo '  <td>' . $actividad->getNota() . '</td>';
                     echo '  <td>';
                     echo '      <a href="form_actividad.php?id=' . $actividad->getId() . '&codigo=' . $codigo . '">modificar</a>';
-                    echo '      <a href="views/accion_borrar_actividad.php?id=' . $actividad->getId() . '">borrar</a>';
+                    echo '      <a href="accion_borrar_actividad.php?id=' . $actividad->getId() . '">borrar</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }

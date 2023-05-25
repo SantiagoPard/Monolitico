@@ -13,5 +13,6 @@ abstract class BaseController
     abstract function createActividad($model,$codigo);
     abstract function updateActividad($id,$model);
     abstract function readRowAct($id);
+    abstract function deleteAct($id);
     
 }
