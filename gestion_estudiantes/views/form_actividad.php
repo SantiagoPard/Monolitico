@@ -11,14 +11,15 @@ use actividad\Actividad;
 
 $id = empty($_GET['id']) ? '' : $_GET['id'];
 $codigo = $_GET['codigo'];
+$nombres = $_GET['nombres'];
 $titulo = 'Registrar Actividad';
-$urlAction = "accion_registro_actividad.php";
+$urlAction = "accion_registro_actividad.php?nombres=$nombres";
 $Actividad = new Actividad();
 $readOnly = 'readonly style="opacity:0.5; cursor:default;  background-color: #eee;"';
 
 if (!empty($id)) {
     $titulo = 'Modificar Actividad';
-    $urlAction = "accion_modificar_actividad.php?id=".$id;
+    $urlAction = "accion_modificar_actividad.php?id=$id&nombres=$nombres";
     $EstudianteController = new EstudianteController();
     $Actividad = $EstudianteController->readRowAct($id);
     $readOnly = 'readonly' . ' style="opacity:0.5; cursor:default;  background-color: #eee;"';
@@ -45,7 +46,8 @@ if (!empty($id)) {
     <form action="<?php echo $urlAction; ?>" method="post">
         <label>
             <span>codigo estudiante:</span>
-            <input type="number" name="codigo" value="<?php echo $codigo; ?>" required <?php echo $readOnly ?>>
+            <input type="number" name="codigo" value="<?php echo $codigo;?>" required <?php echo $readOnly ?> >
+            <?php echo print_r($codigo)?>
         </label>
         <br>
         <label>

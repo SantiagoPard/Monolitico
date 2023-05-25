@@ -11,6 +11,8 @@ use actividad\Actividad;
 
 $Actividad = new Actividad();
 $id = $_GET['id'];
+$codigo = $_POST['codigo'];
+$nombres = $_GET['nombres'];
 $Actividad->setDescripcion($_POST['descripcion']);
 $Actividad->setNota($_POST['nota']);
 
@@ -22,8 +24,8 @@ if ($resultado) {
 } else {
     echo '<h1>No se pudo modificar la actividad</h1>';
 }
+echo '<a href="notas_estudiante.php?codigo='.$codigo.'&nombres='.$nombres.'.">Volver al inicio</a>'
 ?>
-<br>
-<a href="../index.php">Volver al inicio</a>
+
 
 
