@@ -12,19 +12,12 @@ use actividad\Actividad;
 
 $codigo = $_GET['codigo'];
 $nombres = $_GET['nombres'];
-$urlAction = "accion_registro_Estudiante.php";
 $estudianteController = new EstudianteController();
 $actividades = $estudianteController->readNotas($codigo);
 
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
 
-$estudianteController = new EstudianteController();
-
-$estudiantes = $estudianteController->readEstudiantes();
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,7 +29,7 @@ $estudiantes = $estudianteController->readEstudiantes();
 <body>
     <main>
         <h1>Notas</h1>
-        <a href="views/form_estudiante.php">Agregar Actividad</a>
+        <a href="form_actividad.php?codigo=<?php echo $codigo ?>">Agregar Actividad</a>
         <h1>estudiante:
             <?php echo $nombres; ?>
         </h1>

@@ -40,7 +40,7 @@ class EstudianteController extends BaseController
         }
         $conexiondb->close();
         return $estudiantes;
-        
+
     }
 
     function readRow($codigo)
@@ -64,7 +64,7 @@ class EstudianteController extends BaseController
         $sql = 'update estudiantes set ';
         $sql .= 'nombres ="' . $estudiante->getNombre() . '",';
         $sql .= 'apellidos="' . $estudiante->getApellido() . '"';
-        $sql .= ' where codigo=' . $codigo .';';
+        $sql .= ' where codigo=' . $codigo . ';';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
@@ -79,9 +79,10 @@ class EstudianteController extends BaseController
         $conexiondb->close();
         return $resultadoSQL;
     }
-    function readNotas($codigo){
-        $sql  = 'select id,descripcion,nota from estudiantes,actividades ';
-        $sql .= 'WHERE estudiantes.codigo='.$codigo.'&&  estudiantes.codigo = actividades.codigoEstudiante;';
+    function readNotas($codigo)
+    {
+        $sql = 'select id,descripcion,nota from estudiantes,actividades ';
+        $sql .= 'WHERE estudiantes.codigo=' . $codigo . '&&  estudiantes.codigo = actividades.codigoEstudiante;';
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $actividades = [];
@@ -96,7 +97,18 @@ class EstudianteController extends BaseController
         print_r($actividades);
         return $actividades;
     }
-    function createActividad(){
-        
+    function createActividad($Actividad, $codigo)
+    {
+        $sql  = 'insert into actividades ';
+        $sql .= '(descripcion,nota,codigoEstudiante) VALUES ';
+        $sql .= '("';
+        $sql .= $Actividad->getDescripcion() . '",';
+        $sql .= '' . $Actividad->getNota() . ',';
+        $sql .= '' . $codigo . '';
+        $sql .= ')';
+        $conexiondb = new ConexionDbController();
+        $resultadoSQL = $conexiondb->execSQL($sql);
+        $conexiondb->close();
+        return $resultadoSQL;
     }
 }

@@ -10,6 +10,6 @@ abstract class BaseController
     abstract function delete($codigo);
     abstract function readRow($id);
     abstract function readNotas($codigo);
-    abstract function createActividad();
+    abstract function createActividad($model,$codigo);
     
 }
