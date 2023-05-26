@@ -4,19 +4,21 @@ require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
 require '../controllers/EstudianteController.php';
 require '../models/Actividades.php';
+require '../controllers/ActividadBaseController.php';
+require '../controllers/ActividadController.php';
 
-use Estudiante\Estudiante;
-use EstudianteController\EstudianteController;
+
 use actividad\Actividad;
+use actividadController\ActividadController;
 
-$Actividad = new Actividad();
+$actividad = new Actividad();
 $codigo = $_POST['codigo'];
 $nombres = $_GET['nombres'];
-$Actividad->setDescripcion($_POST['descripcion']);
-$Actividad->setNota($_POST['nota']);
+$actividad->setDescripcion($_POST['descripcion']);
+$actividad->setNota($_POST['nota']);
 
-$EstudianteController = new EstudianteController();
-$resultado = $EstudianteController->createActividad($Actividad, $codigo);
+$ActividadController = new ActividadController();
+$resultado = $ActividadController->createActividad($actividad, $codigo);
 if ($resultado) {
     echo '<h1>Actividad Registrada</h1>';
 } else {

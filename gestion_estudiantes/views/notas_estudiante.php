@@ -4,17 +4,15 @@ require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
 require '../controllers/EstudianteController.php';
 require '../models/Actividades.php';
+require '../controllers/ActividadBaseController.php';
+require '../controllers/ActividadController.php';
 
-use baseControler\BaseController;
-use estudiante\Estudiante;
-use estudianteController\EstudianteController;
-use actividad\Actividad;
+use actividadController\ActividadController;
 
 $codigo = $_GET['codigo'];
 $nombres = $_GET['nombres'];
-$estudianteController = new EstudianteController();
-$actividades = $estudianteController->readNotas($codigo);
-
+$actividadController = new ActividadController();
+$actividades = $actividadController->readNotas($codigo);
 
 ?>
 
@@ -64,14 +62,19 @@ $actividades = $estudianteController->readNotas($codigo);
                     $cont++;
                     $suma += $actividad->getNota();
                 }
+                if($suma>0){
                 $prom = $suma / ($cont - 1);
+                }
+                if(empty($actividad)){
+                    echo "debe ingresar una actividad";
+                }
                 ?>
             </tbody>
         </table>
         <?php
-        if($prom>=3){
+        if($prom>=3 ){
             echo '<font color="green"> FELICITACIONES '.$prom.'</font>'; 
-        }else{
+        }else if($prom<3){
             echo '<font color="red"> INSUFICIENTE '.$prom.'</font>';
         }
         ?>
